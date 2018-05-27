@@ -1,7 +1,7 @@
-WITH_CUDA=on
+export WITH_CUDA=ON
 
 if [ $# -e 2 ]; then
-    WITH_CUDA=off
+    export WITH_CUDA=OFF
 fi
 
 
