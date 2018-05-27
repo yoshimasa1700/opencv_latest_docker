@@ -6,4 +6,4 @@ services:
   - docker
 
 script:
-    - bash ./build.sh
+    - bash ./build.sh cuda_off
