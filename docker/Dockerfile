@@ -5,6 +5,8 @@ LABEL com.nvidia.volumes.needed="nvidia_driver"
 ENV PATH /usr/local/nvidia/bin:${PATH}
 ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64:${LD_LIBRARY_PATH}
 
+ARG WITH_CUDA=ON
+
 RUN apt-get update && \
     apt-get install -y \
     python-pip \
@@ -46,6 +48,8 @@ RUN apt-get update && \
     python3-numpy \
     && rm -rf /var/lib/apt/lists/*
 
+RUN echo test2
+
 WORKDIR /
 
 # clone from repository.
@@ -59,7 +63,8 @@ WORKDIR /opencv/build
 RUN cmake -DBUILD_TIFF=ON \
     -DBUILD_opencv_java=OFF \
     -DBUILD_SHARED_LIBS=OFF \
-    -DWITH_CUDA=${WITH_CUDA} \
+    -DWITH_CUDA=$WITH_CUDA \
+    -DBUILD_OPENCV_PYTHON3=ON \
     -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-8.0 \
     -DCUDA_ARCH_BIN='3.0 3.5 5.0 6.0 6.2' \
     -DCUDA_ARCH_PTX="" \
@@ -77,10 +82,9 @@ RUN cmake -DBUILD_TIFF=ON \
     -DWITH_GDAL=ON \
     -DWITH_1394=OFF \
     -DWITH_FFMPEG=OFF \
-    -DBUILD_PROTOBUF=OFF \
+    -DBUILD_PROTOBUF=ON \
     -DBUILD_TESTS=OFF \
     -DBUILD_PERF_TESTS=OFF \
-    -DBUILD_DNN=ON \
     -DCMAKE_BUILD_TYPE=RELEASE \
     ..
 
