@@ -59,7 +59,7 @@ WORKDIR /opencv/build
 RUN cmake -DBUILD_TIFF=ON \
     -DBUILD_opencv_java=OFF \
     -DBUILD_SHARED_LIBS=OFF \
-    -DWITH_CUDA=ON \
+    -DWITH_CUDA=OFF \
     -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-8.0 \
     -DCUDA_ARCH_BIN='3.0 3.5 5.0 6.0 6.2' \
     -DCUDA_ARCH_PTX="" \
