@@ -46,6 +46,7 @@ RUN apt-get update && \
     python-numpy \
     python3-dev \
     python3-numpy \
+    sudo \
     && rm -rf /var/lib/apt/lists/*
 
 RUN echo test2
@@ -100,3 +101,6 @@ RUN useradd -m $USERNAME && \
 RUN usermod -aG sudo $USERNAME
 RUN usermod  --uid 1000 $USERNAME
 RUN groupmod --gid 1000 $USERNAME
+RUN echo $USERNAME:$USERNAME | chpasswd
+
+RUN echo root:root | chpasswd
