@@ -92,15 +92,3 @@ RUN cmake -DBUILD_TIFF=ON \
 # build.
 RUN export NUMPROC=$(nproc --all) \
     && make -j$NUMPROC install
-
-# add user.
-ENV USERNAME opencv-user
-RUN useradd -m $USERNAME && \
-    echo "$USERNAME:$USERNAME" | chpasswd && \
-    usermod --shell /bin/bash $USERNAME
-RUN usermod -aG sudo $USERNAME
-RUN usermod  --uid 1000 $USERNAME
-RUN groupmod --gid 1000 $USERNAME
-RUN echo $USERNAME:$USERNAME | chpasswd
-
-RUN echo root:root | chpasswd
